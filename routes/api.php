@@ -1,11 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\api\BoxOperationController;
-use App\Http\Controllers\api\BoxStockController;
-use App\Http\Controllers\api\DlStockController;
 use App\Http\Controllers\api\PermissionController;
 use App\Http\Controllers\api\RoleController;
+use App\Http\Controllers\api\TaskManageController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +39,11 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::put('/permissions/{permission}', [PermissionController::class, 'update'])->name('permissions.update')->middleware('permission:permission-edit');
     Route::delete('/permissions/{permission}', [PermissionController::class, 'destroy'])->name('permissions.destroy')->middleware('permission:permission-delete');
 
+    Route::get('/tasks', [TaskManageController::class, 'index']); // Get all tasks
+    Route::post('/tasks', [TaskManageController::class, 'store']); // Create a new task
+    Route::get('/tasks/{task}', [TaskManageController::class, 'show']); // Get a specific task
+    Route::put('/tasks/{task}', [TaskManageController::class, 'update']); // Update a specific task
+    Route::delete('/tasks/{task}', [TaskManageController::class, 'destroy']); // Delete a specific task
 });
 
 
